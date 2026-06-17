@@ -1,0 +1,277 @@
+# Employee Payroll & Workforce Management System Rules
+
+## Project Authority
+
+Always follow:
+
+1. PROJECT_MASTER_SPEC.md
+2. DATABASE_SCHEMA.md
+3. SYSTEM_ARCHITECTURE.md
+4. PROJECT_STRUCTURE.md
+5. Module Pseudocode Documents
+
+If conflicts occur:
+
+Pseudocode
+>
+Master Spec
+>
+Database Schema
+>
+Architecture
+
+Never invent new business rules.
+
+---
+
+## Roles
+
+System supports only:
+
+ADMIN
+HR
+EMPLOYEE
+
+No additional roles allowed.
+
+---
+
+## Authentication
+
+Use:
+
+Spring Security
+JWT Authentication
+Role Based Authorization
+
+No Session Authentication.
+
+---
+
+## Employee Management
+
+No Employee Delete.
+
+No HR Delete.
+
+Only Deactivate.
+
+Employee IDs:
+
+EMP001
+EMP002
+EMP003
+
+Never Reuse.
+
+HR IDs:
+
+HR001
+HR002
+HR003
+
+Never Reuse.
+
+---
+
+## Attendance
+
+One Check-In Per Day.
+
+One Check-Out Per Day.
+
+Statuses:
+
+PRESENT
+ABSENT
+LEAVE
+HALF_DAY_LEAVE
+
+Saturday and Sunday:
+
+Holiday.
+
+---
+
+## Leave
+
+Annual Paid Leave:
+
+Read From System Settings.
+
+Leave Types:
+
+CASUAL
+SICK
+UNPAID
+
+Approval:
+
+Employee → HR
+
+HR → ADMIN
+
+---
+
+## Payroll
+
+Formula:
+
+Final Salary =
+Basic Salary
++ Bonus
+- PF
+- Unpaid Leave Deduction
+
+PF Percentage:
+
+Read From System Settings.
+
+Payroll Generation
+≠
+Salary Credit.
+
+Salary Credit:
+
+Manual Action.
+
+---
+
+## Payslip
+
+Generated Automatically.
+
+PDF Only.
+
+Use Payroll Snapshot Data.
+
+Never Recalculate Salary.
+
+---
+
+## Reports
+
+PDF Only.
+
+Use Shared Summary Services.
+
+Dashboard Totals
+=
+Report Totals
+
+---
+
+## Notifications
+
+Bell:
+
+Latest 10 Notifications.
+
+History:
+
+30 Days.
+
+Notifications are event driven.
+
+---
+
+## System Settings
+
+Single Settings Record.
+
+Never Delete.
+
+Only Admin Can Manage.
+
+---
+
+## Backend Rules
+
+Architecture:
+
+Controller
+→ Service
+→ Repository
+
+Never skip layers.
+
+Use DTOs.
+
+Use Mappers.
+
+Business Logic belongs only in Service Layer.
+
+---
+
+## Frontend Rules
+
+React + Vite
+
+Role Based Layouts:
+
+AdminLayout
+
+HRLayout
+
+EmployeeLayout
+
+Use Protected Routes.
+
+Never hardcode API URLs.
+
+Use service layer.
+
+---
+
+## Database Rules
+
+Use MySQL.
+
+Use snake_case columns.
+
+Use soft delete via status fields.
+
+No physical delete for employees or HR.
+
+---
+
+## Development Rules
+
+Implement one module at a time.
+
+Complete Backend First.
+
+Then Frontend.
+
+Then Testing.
+
+Never redesign project architecture.
+
+Never create new modules.
+
+Follow pseudocode exactly.
+
+When uncertain:
+Ask before changing business logic.
+
+## Profile Pictures
+
+Store files in:
+
+backend/uploads/profile/
+
+Database stores only:
+
+profile_photo_url
+
+Allowed Formats:
+
+JPG
+JPEG
+PNG
+
+Maximum Size:
+
+2 MB
+
+Users may update only their own profile photo.

@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:payroll_test;DB_CLOSE_DELAY=-1;MODE=MySQL
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  mail:
+    host: localhost
+    port: 1025
+
+app:
+  jwt:
+    secret: test-secret-key-minimum-256-bits-long-for-jwt-hs256-algo
+    expiration-ms: 3600000
+  cors:
+    allowed-origins: http://localhost:5173
+  seed:
+    admin-email: test-admin@company.com
+    admin-password: Test@123456

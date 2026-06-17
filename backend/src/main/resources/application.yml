@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: payroll-workforce-api
+  profiles:
+    active: dev
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 2MB
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:change-me-to-a-256-bit-secret-key-for-production-use-only}
+    expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173}
+  upload:
+    profile-dir: ${PROFILE_UPLOAD_DIR:uploads/profile}
+    payslip-dir: ${PAYSLIP_UPLOAD_DIR:uploads/payslips}
+  seed:
+    admin-email: ${ADMIN_EMAIL:admin@company.com}
+    admin-password: ${ADMIN_PASSWORD:Admin@123456}
+    admin-full-name: ${ADMIN_FULL_NAME:System Administrator}
+    admin-employee-code: ${ADMIN_EMPLOYEE_CODE:ADM001}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: when_authorized
