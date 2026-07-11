@@ -28,3 +28,7 @@ logging:
   level:
     com.company.payroll: DEBUG
     org.springframework.security: INFO
+management:
+  health:
+    mail:
+      enabled: false
