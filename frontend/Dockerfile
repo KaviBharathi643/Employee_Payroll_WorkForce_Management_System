@@ -9,8 +9,7 @@ RUN npm ci
 
 COPY . .
 
-# Build with empty VITE_API_BASE_URL to enable relative path API calls in production
-ENV VITE_API_BASE_URL=""
+
 RUN npm run build
 
 # Stage 2 - Serve using Nginx
