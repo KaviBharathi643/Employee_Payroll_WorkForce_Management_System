@@ -569,7 +569,7 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 
 ## Authors
 
-- **Kavi Bharathi** - Initial work and full-stack development
+- **Kavi Bharathi P** - Full-stack development & system architecture design
 
 ## Acknowledgments
 
