@@ -561,7 +561,7 @@ lsof -ti:5173 | xargs kill -9
 
 ## Support
 
-For support, email support@company.com or open an issue on GitHub.
+For support, email kavi103535@gmail.com or open an issue on GitHub.
 
 ## License
 
