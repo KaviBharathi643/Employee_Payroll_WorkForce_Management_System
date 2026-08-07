@@ -17,12 +17,14 @@ import com.company.payroll.repository.UserProfileRepository;
 import com.company.payroll.repository.UserRepository;
 import com.company.payroll.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AuthService {
 
     private final UserRepository userRepository;
@@ -35,19 +37,25 @@ public class AuthService {
 
     @Transactional(readOnly = true)
     public LoginResponseDto login(LoginRequestDto request) {
+        log.info("[LOGIN-DEBUG] start email={}", request.getEmail());
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new UnauthorizedException("Invalid Email Or Password"));
+        log.info("[LOGIN-DEBUG] user loaded id={}", user.getId());
 
         if (!StatusConstants.ACTIVE.equals(user.getStatus())) {
             throw new UnauthorizedException("Account Is Inactive");
         }
+        log.info("[LOGIN-DEBUG] status check passed");
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new UnauthorizedException("Invalid Email Or Password");
         }
+        log.info("[LOGIN-DEBUG] password verified");
 
         UserProfile profile = userProfileRepository.findByUser(user).orElse(null);
+        log.info("[LOGIN-DEBUG] profile loaded present={}", profile != null);
         String token = jwtTokenProvider.generateToken(user.getId(), user.getEmail(), user.getRole());
+        log.info("[LOGIN-DEBUG] token generated");
         return authMapper.toLoginResponse(token, user, profile);
     }
 

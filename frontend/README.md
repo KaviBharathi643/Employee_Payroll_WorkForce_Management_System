@@ -2,7 +2,7 @@
 
 React 18 + Vite + Tailwind CSS + Axios + React Router v6.
 
-## Phase 4.1 — Foundation (complete)
+## Phase 4.1 — Foundation (completed)
 
 - Vite project with Tailwind v4
 - Axios client with JWT interceptor and 401 handling
@@ -11,7 +11,7 @@ React 18 + Vite + Tailwind CSS + Axios + React Router v6.
 - Layouts: `AuthLayout`, `EmployeeLayout`, `HRLayout`, `AdminLayout`
 - API contract: `docs/FRONTEND_API_CONTRACT.md`
 
-## Phase 4.2 — Authentication pages (complete)
+## Phase 4.2 — Authentication pages (completed)
 
 - Login with post-reset success message and return-url redirect
 - Forgot password: email → OTP send → OTP verify (2-step)
