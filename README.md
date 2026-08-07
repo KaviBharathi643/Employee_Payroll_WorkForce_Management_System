@@ -141,72 +141,20 @@ With features like automated payroll generation, attendance tracking, leave mana
 
 ## System Architecture
 
-```
-┌──────────────────────────────────────────────────────────────┐
-│                       Browser/Client                          │
-└─────────────────────────┬──────────────────────────────────────┘
-                          │
-                          │ HTTP/HTTPS
-                          ▼
-┌──────────────────────────────────────────────────────────────┐
-│                  React Frontend (Vite)                        │
-│  ┌─────────────────────────────────────────────────────────┐ │
-│  │           Components & Pages (Role-based)              │ │
-│  │  - Admin Dashboard  - HR Dashboard  - Employee Portal  │ │
-│  └──────────────────────┬──────────────────────────────────┘ │
-│                         │                                    │
-│  ┌──────────────────────▼──────────────────────────────────┐ │
-│  │          Context API & React Router                     │ │
-│  │  - Authentication Context  - Routing  - State Mgmt     │ │
-│  └──────────────────────┬──────────────────────────────────┘ │
-│                         │                                    │
-│  ┌──────────────────────▼──────────────────────────────────┐ │
-│  │         Axios HTTP Client                              │ │
-│  │  - API Requests  - Request/Response Handling           │ │
-│  └──────────────────────┬──────────────────────────────────┘ │
-└─────────────────────────┼──────────────────────────────────────┘
-                          │
-                          │ REST API (JSON)
-                          ▼
-┌──────────────────────────────────────────────────────────────┐
-│                  Spring Boot Backend                         │
-│  ┌─────────────────────────────────────────────────────────┐ │
-│  │              REST API Controllers                       │ │
-│  │  - AuthController  - EmployeeController               │ │
-│  │  - AttendanceController  - LeaveController            │ │
-│  │  - PayrollController  - ReportController              │ │
-│  └──────────────────────┬──────────────────────────────────┘ │
-│                         │                                    │
-│  ┌──────────────────────▼──────────────────────────────────┐ │
-│  │            JWT Security Layer                          │ │
-│  │  - Token Validation  - Authorization Filters          │ │
-│  │  - Spring Security  - RBAC Enforcement                │ │
-│  └──────────────────────┬──────────────────────────────────┘ │
-│                         │                                    │
-│  ┌──────────────────────▼──────────────────────────────────┐ │
-│  │            Service Layer                               │ │
-│  │  - EmployeeService  - AttendanceService               │ │
-│  │  - LeaveService  - PayrollService                     │ │
-│  │  - ReportService  - NotificationService              │ │
-│  └──────────────────────┬──────────────────────────────────┘ │
-│                         │                                    │
-│  ┌──────────────────────▼──────────────────────────────────┐ │
-│  │           JPA Repository Layer                         │ │
-│  │  - Hibernate ORM  - Query Methods                      │ │
-│  │  - Transaction Management                             │ │
-│  └──────────────────────┬──────────────────────────────────┘ │
-└─────────────────────────┼──────────────────────────────────────┘
-                          │
-                          │ JDBC
-                          ▼
-┌──────────────────────────────────────────────────────────────┐
-│                    MySQL Database                           │
-│  ┌─────────────────────────────────────────────────────────┐ │
-│  │  users  │  employee  │  attendance  │  payroll        │ │
-│  │  leave  │  payslip   │  notification  │  settings     │ │
-│  └─────────────────────────────────────────────────────────┘ │
-└──────────────────────────────────────────────────────────────┘
-```
+The project is built on a decoupled three-tier software architecture:
+
+### 1. Overall System Architecture
+![Overall 3-Tier System Architecture](./docs/diagrams/sys_architecture.png)
+
+### 2. System Use Case Boundaries
+![System Use Case Boundaries](./docs/diagrams/sys_usecase.png)
+
+### 3. Data Flow Diagram (Level 1)
+![DFD Level 1](./docs/diagrams/sys_dfd_l1.png)
+
+### 4. Leave Request Workflow (Activity Diagram)
+![Leave Request Workflow](./docs/diagrams/sys_leave_workflow.png)
+
 
 ## Roles and Permissions
 
@@ -225,26 +173,10 @@ With features like automated payroll generation, attendance tracking, leave mana
 
 ## Database Design
 
-### Entity Relationship Overview
+### Entity Relationship Diagram (ERD)
 
-```
-users (PK: user_id)
-├── user_profiles (FK: user_id)
-├── user_employment (FK: user_id)
-├── user_bank_details (FK: user_id)
-├── attendance (FK: user_id)
-├── leave_requests (FK: user_id, approver_id)
-└── otp_verifications (FK: user_id)
+![Database ERD](./docs/diagrams/db_erd.png)
 
-payrolls (PK: payroll_id)
-├── FK: user_id
-└── payslips (FK: payroll_id, user_id)
-
-notifications (PK: notification_id)
-└── FK: user_id
-
-system_settings (PK: setting_id)
-```
 
 ### Core Tables
 
@@ -436,55 +368,44 @@ npm run build
 
 ## Screenshots
 
+### 📄 Project Report
+A complete, detailed **20-page project report** with architecture flowcharts, database ERD, use cases, Level-1 DFD, and module walkthroughs is available as a PDF:
+👉 **[Download Project Report (PDF)](./Employee_Payroll_Workforce_Management_System_Project_Report.pdf)**
+
+---
+
 ### Authentication
 
 #### Login Page
-*Screenshot of login page with email/password fields*
+![Login Page](./docs/screenshots/ui_login.png)
 
-#### Forgot Password
-*Screenshot of forgot password with OTP verification*
+#### Forgot Password & Reset Password with OTP
+![Reset Password with OTP](./docs/screenshots/ui_reset_password.png)
 
 ### Admin Dashboard
 
 #### Dashboard Overview
-*Main admin dashboard with key metrics and quick actions*
-
-#### Admin Panel
-*Admin control panel with system management options*
+![Admin Dashboard](./docs/screenshots/ui_admin_dashboard.png)
 
 ### HR Module
 
-#### HR Dashboard
-*HR dashboard with key HR metrics*
+#### HR Dashboard & Metrics
+![HR Dashboard](./docs/screenshots/ui_hr_dashboard.png)
 
-#### Employee Management
-*Employee list and management interface*
+#### Employee Onboarding
+![Employee Onboarding](./docs/screenshots/ui_create_employee.png)
 
-#### Attendance Management
-*Attendance tracking and analytics interface*
-
-#### Leave Management
-*Leave request approval interface*
-
-#### Payroll Management
-*Payroll generation and processing interface*
+#### Attendance Management Filters
+![Attendance Management](./docs/screenshots/ui_hr_attendance.png)
 
 ### Employee Module
 
-#### Employee Dashboard
-*Employee personal dashboard*
-
-#### Attendance Records
-*Employee attendance view*
+#### Profile Details Update
+![My Profile](./docs/screenshots/ui_my_profile.png)
 
 #### Leave Application
-*Leave application form*
+![Leave Application](./docs/screenshots/ui_apply_leave.png)
 
-#### Payslip Downloads
-*Payslip viewing and download interface*
-
-#### Notifications
-*Notification center*
 
 ## Project Structure
 
