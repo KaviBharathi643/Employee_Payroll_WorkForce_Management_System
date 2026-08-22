@@ -14,6 +14,8 @@ A comprehensive, production-ready full-stack application for managing employee p
 ## Login Page
 <img width="1600" height="862" alt="WhatsApp Image 2026-08-22 at 11 21 06 AM" src="https://github.com/user-attachments/assets/3272f45c-fbda-494b-8277-fbb326b8254b" />
 
+## Dashboard 
+<img width="1919" height="931" alt="image" src="https://github.com/user-attachments/assets/e7503dfa-c9fd-48c3-aa09-d6c3d0088287" />
 
 ## Table of Contents
 
