@@ -11,29 +11,35 @@
 
 A comprehensive, production-ready full-stack application for managing employee payroll, attendance, leave requests, and workforce operations. Built with modern technologies and best practices for scalability and maintainability.
 
-## Login Page
-<img width="1600" height="862" alt="WhatsApp Image 2026-08-22 at 11 21 06 AM" src="https://github.com/user-attachments/assets/3272f45c-fbda-494b-8277-fbb326b8254b" />
+#### Login Page
+![Login Page](./docs/screenshots/ui_login.png)
 
-## Dashboard 
-<img width="1919" height="931" alt="image" src="https://github.com/user-attachments/assets/e7503dfa-c9fd-48c3-aa09-d6c3d0088287" />
+#### Forgot Password & Reset Password with OTP
+![Reset Password with OTP](./docs/screenshots/ui_reset_password.png)
 
-## Table of Contents
+### Admin Dashboard
 
-- [Overview](#overview)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [System Architecture](#system-architecture)
-- [Roles and Permissions](#roles-and-permissions)
-- [Database Design](#database-design)
-- [Installation](#installation)
-- [Usage](#usage)
-- [API Overview](#api-overview)
-- [Screenshots](#screenshots)
-- [Project Structure](#project-structure)
-- [Default Credentials](#default-credentials)
-- [Future Enhancements](#future-enhancements)
-- [Contributing](#contributing)
-- [License](#license)
+#### Dashboard Overview
+![Admin Dashboard](./docs/screenshots/ui_admin_dashboard.png)
+
+### HR Module
+
+#### HR Dashboard & Metrics
+![HR Dashboard](./docs/screenshots/ui_hr_dashboard.png)
+
+#### Employee Onboarding
+![Employee Onboarding](./docs/screenshots/ui_create_employee.png)
+
+#### Attendance Management Filters
+![Attendance Management](./docs/screenshots/ui_hr_attendance.png)
+
+### Employee Module
+
+#### Profile Details Update
+![My Profile](./docs/screenshots/ui_my_profile.png)
+
+#### Leave Application
+![Leave Application](./docs/screenshots/ui_apply_leave.png)
 
 ## Overview
 
@@ -144,23 +150,6 @@ With features like automated payroll generation, attendance tracking, leave mana
 - **Git**: Version control
 - **Docker**: Containerization (future)
 - **Redis**: Caching (future)
-
-## System Architecture
-
-The project is built on a decoupled three-tier software architecture:
-
-### 1. Overall System Architecture
-![Overall 3-Tier System Architecture](./docs/diagrams/sys_architecture.png)
-
-### 2. System Use Case Boundaries
-![System Use Case Boundaries](./docs/diagrams/sys_usecase.png)
-
-### 3. Data Flow Diagram (Level 1)
-![DFD Level 1](./docs/diagrams/sys_dfd_l1.png)
-
-### 4. Leave Request Workflow (Activity Diagram)
-![Leave Request Workflow](./docs/diagrams/sys_leave_workflow.png)
-
 
 ## Roles and Permissions
 
@@ -380,38 +369,6 @@ A complete, detailed **20-page project report** with architecture flowcharts, da
 
 ---
 
-### Authentication
-
-#### Login Page
-![Login Page](./docs/screenshots/ui_login.png)
-
-#### Forgot Password & Reset Password with OTP
-![Reset Password with OTP](./docs/screenshots/ui_reset_password.png)
-
-### Admin Dashboard
-
-#### Dashboard Overview
-![Admin Dashboard](./docs/screenshots/ui_admin_dashboard.png)
-
-### HR Module
-
-#### HR Dashboard & Metrics
-![HR Dashboard](./docs/screenshots/ui_hr_dashboard.png)
-
-#### Employee Onboarding
-![Employee Onboarding](./docs/screenshots/ui_create_employee.png)
-
-#### Attendance Management Filters
-![Attendance Management](./docs/screenshots/ui_hr_attendance.png)
-
-### Employee Module
-
-#### Profile Details Update
-![My Profile](./docs/screenshots/ui_my_profile.png)
-
-#### Leave Application
-![Leave Application](./docs/screenshots/ui_apply_leave.png)
-
 
 ## Project Structure
 
@@ -584,7 +541,5 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 - All contributors and supporters of this project
 
 ---
-
-**Made with ❤️ by Kavi Bharathi P**
 
 <!-- Touch to update git timestamp -->
