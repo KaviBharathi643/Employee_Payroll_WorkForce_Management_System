@@ -131,3 +131,18 @@ export function getInitials(name) {
     .join('');
 }
 
+/**
+ * Format bytes into human-readable file size string (e.g. "1.5 MB", "420 KB")
+ * @param {number} bytes
+ * @param {number} [decimals=1]
+ */
+export function formatFileSize(bytes, decimals = 1) {
+  if (!bytes || bytes === 0) return '0 B';
+  const k = 1024;
+  const dm = decimals < 0 ? 0 : decimals;
+  const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
+}
+
+
