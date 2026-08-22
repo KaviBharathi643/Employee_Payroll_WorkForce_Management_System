@@ -1,3 +1,6 @@
+/**
+ * HR Attendance Page view supporting self-attendance tab and company-wide employee attendance monitoring.
+ */
 import { useState } from 'react';
 import PageHeader from '../../components/common/PageHeader';
 import { ROLES } from '../../utils/constants';

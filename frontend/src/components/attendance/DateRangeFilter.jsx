@@ -1,3 +1,6 @@
+/**
+ * Date range filter form component with fromDate, toDate, and trigger action button.
+ */
 import FormField from '../forms/FormField';
 
 export default function DateRangeFilter({ fromDate, toDate, onFromChange, onToChange, onSubmit, loading }) {
