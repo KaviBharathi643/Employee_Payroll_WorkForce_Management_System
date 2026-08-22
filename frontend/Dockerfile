@@ -1,3 +1,4 @@
+# Multi-stage Docker build for React Frontend with Nginx
 # Stage 1 - Build React App
 FROM node:22-alpine AS builder
 

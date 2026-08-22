@@ -1,3 +1,4 @@
+# Backend Docker build ignore patterns
 target
 .git
 .idea
