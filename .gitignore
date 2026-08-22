@@ -34,3 +34,5 @@ Thumbs.db
 
 # Docker
 .docker/
+
+# Touch to update git timestamp
