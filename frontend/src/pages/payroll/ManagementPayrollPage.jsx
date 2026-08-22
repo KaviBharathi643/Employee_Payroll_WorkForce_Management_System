@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import Alert from '../../components/common/Alert';
 import PageHeader from '../../components/common/PageHeader';
 import Modal from '../../components/common/Modal';
@@ -27,7 +27,7 @@ const CONFIG = {
 
 export default function ManagementPayrollPage({ viewerRole }) {
   const config = CONFIG[viewerRole];
-  const defaultPeriod = currentPayrollPeriod();
+  const defaultPeriod = useMemo(() => currentPayrollPeriod(), []);
 
   const [period, setPeriod] = useState(defaultPeriod);
   const [summary, setSummary] = useState(null);
@@ -38,22 +38,25 @@ export default function ManagementPayrollPage({ viewerRole }) {
   const [showGenerate, setShowGenerate] = useState(false);
   const [selected, setSelected] = useState(null);
 
-  const loadSummary = useCallback(async () => {
+  const loadSummary = useCallback(async (yr, mo) => {
     try {
-      const data = await payrollService.getSummary();
+      const data = await payrollService.getSummary({
+        payrollYear: yr,
+        payrollMonth: mo,
+      });
       setSummary(data);
     } catch (err) {
       setError(getErrorMessage(err, 'Failed to load payroll summary'));
     }
   }, []);
 
-  const loadReport = useCallback(async () => {
+  const loadReport = useCallback(async (yr, mo) => {
     setLoading(true);
     setError('');
     try {
       const data = await payrollService.getReport({
-        payrollYear: period.payrollYear,
-        payrollMonth: period.payrollMonth,
+        payrollYear: yr,
+        payrollMonth: mo,
       });
       setRows(data || []);
     } catch (err) {
@@ -61,19 +64,20 @@ export default function ManagementPayrollPage({ viewerRole }) {
     } finally {
       setLoading(false);
     }
-  }, [period.payrollMonth, period.payrollYear]);
+  }, []);
 
   useEffect(() => {
-    loadSummary();
-  }, [loadSummary]);
+    loadSummary(defaultPeriod.payrollYear, defaultPeriod.payrollMonth);
+  }, [loadSummary, defaultPeriod]);
 
   useEffect(() => {
-    loadReport();
-  }, [loadReport]);
+    loadReport(defaultPeriod.payrollYear, defaultPeriod.payrollMonth);
+  }, [loadReport, defaultPeriod]);
 
   const handlePeriodSubmit = (event) => {
     event.preventDefault();
-    loadReport();
+    loadSummary(period.payrollYear, period.payrollMonth);
+    loadReport(period.payrollYear, period.payrollMonth);
   };
 
   const handleView = async (row) => {
@@ -89,8 +93,8 @@ export default function ManagementPayrollPage({ viewerRole }) {
     if (message) {
       setNotice(message);
     }
-    loadSummary();
-    loadReport();
+    loadSummary(period.payrollYear, period.payrollMonth);
+    loadReport(period.payrollYear, period.payrollMonth);
   };
 
   return (

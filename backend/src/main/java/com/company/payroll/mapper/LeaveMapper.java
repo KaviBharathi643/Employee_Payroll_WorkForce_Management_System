@@ -31,6 +31,7 @@ public class LeaveMapper {
                 .leaveDays(leave.getLeaveDays())
                 .status(leave.getStatus())
                 .reason(leave.getReason())
+                .appliedDate(leave.getCreatedAt())
                 .approvedById(leave.getApprovedBy() != null ? leave.getApprovedBy().getId() : null)
                 .approvedByName(approverProfile != null ? approverProfile.getFullName() : null)
                 .build();

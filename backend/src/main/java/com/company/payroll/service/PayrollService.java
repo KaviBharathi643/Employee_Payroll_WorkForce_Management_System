@@ -150,8 +150,10 @@ public class PayrollService {
     }
 
     @Transactional(readOnly = true)
-    public PayrollSummaryResponseDto getPayrollSummary() {
-        DashboardPayrollSummaryDto summary = dashboardAnalyticsService.getPayrollSummary();
+    public PayrollSummaryResponseDto getPayrollSummary(Integer year, Integer month) {
+        DashboardPayrollSummaryDto summary = (year != null && month != null)
+                ? dashboardAnalyticsService.getPayrollSummary(year, month)
+                : dashboardAnalyticsService.getPayrollSummary();
         return PayrollSummaryResponseDto.builder()
                 .totalSalaryPaid(summary.getTotalSalaryPaid())
                 .totalEmployeesPaid(summary.getCreditedPayrollCount())

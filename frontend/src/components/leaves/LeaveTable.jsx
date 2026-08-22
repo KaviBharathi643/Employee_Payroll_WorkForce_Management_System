@@ -1,4 +1,4 @@
-import { formatDate, formatLabel } from '../../utils/formatters';
+import { formatDate, formatLabel, formatDateTime } from '../../utils/formatters';
 import LeaveActionButtons from './LeaveActionButtons';
 import LeaveStatusBadge from './LeaveStatusBadge';
 
@@ -23,6 +23,7 @@ export default function LeaveTable({
             <th className="px-4 py-3 text-left font-medium text-slate-600">Duration</th>
             <th className="px-4 py-3 text-left font-medium text-slate-600">Dates</th>
             <th className="px-4 py-3 text-left font-medium text-slate-600">Days</th>
+            <th className="px-4 py-3 text-left font-medium text-slate-600">Applied Date</th>
             <th className="px-4 py-3 text-left font-medium text-slate-600">Status</th>
             <th className="px-4 py-3 text-left font-medium text-slate-600">Reason</th>
             <th className="px-4 py-3 text-right font-medium text-slate-600">Actions</th>
@@ -32,7 +33,7 @@ export default function LeaveTable({
           {loading ? (
             <tr>
               <td
-                colSpan={showEmployee ? 8 : 7}
+                colSpan={showEmployee ? 9 : 8}
                 className="px-4 py-8 text-center text-slate-500"
               >
                 Loading leave records...
@@ -41,7 +42,7 @@ export default function LeaveTable({
           ) : rows.length === 0 ? (
             <tr>
               <td
-                colSpan={showEmployee ? 8 : 7}
+                colSpan={showEmployee ? 9 : 8}
                 className="px-4 py-8 text-center text-slate-500"
               >
                 {emptyMessage || 'No leave records found.'}
@@ -68,8 +69,12 @@ export default function LeaveTable({
                   )}
                 </td>
                 <td className="px-4 py-3">{row.leaveDays ?? '—'}</td>
+                <td className="px-4 py-3 text-slate-600">{formatDateTime(row.appliedDate)}</td>
                 <td className="px-4 py-3">
                   <LeaveStatusBadge status={row.status} />
+                  {row.approvedByName && (
+                    <div className="text-xs text-slate-500 mt-1">By {row.approvedByName}</div>
+                  )}
                 </td>
                 <td className="max-w-xs px-4 py-3 text-slate-600">{row.reason}</td>
                 <td className="px-4 py-3 text-right">

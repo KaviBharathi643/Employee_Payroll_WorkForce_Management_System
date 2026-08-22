@@ -50,8 +50,10 @@ public class PayrollController {
 
     @GetMapping("/summary")
     @PreAuthorize("hasAnyRole('HR','ADMIN')")
-    public ApiResponse<PayrollSummaryResponseDto> getPayrollSummary() {
-        PayrollSummaryResponseDto response = payrollService.getPayrollSummary();
+    public ApiResponse<PayrollSummaryResponseDto> getPayrollSummary(
+            @RequestParam(required = false) Integer payrollYear,
+            @RequestParam(required = false) Integer payrollMonth) {
+        PayrollSummaryResponseDto response = payrollService.getPayrollSummary(payrollYear, payrollMonth);
         return ApiResponse.success("Payroll summary retrieved successfully", response);
     }
 

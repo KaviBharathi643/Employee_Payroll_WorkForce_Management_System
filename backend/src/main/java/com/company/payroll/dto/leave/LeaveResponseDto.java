@@ -21,6 +21,7 @@ public class LeaveResponseDto {
     private BigDecimal leaveDays;
     private String status;
     private String reason;
+    private java.time.LocalDateTime appliedDate;
     private Long approvedById;
     private String approvedByName;
 }

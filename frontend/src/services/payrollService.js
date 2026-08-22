@@ -14,8 +14,8 @@ const payrollService = {
   getHistory() {
     return axiosClient.get('/api/payrolls/history').then(unwrap);
   },
-  getSummary() {
-    return axiosClient.get('/api/payrolls/summary').then(unwrap);
+  getSummary(params) {
+    return axiosClient.get('/api/payrolls/summary', { params }).then(unwrap);
   },
   getReport(params) {
     return axiosClient.get('/api/payrolls/report', { params }).then(unwrap);

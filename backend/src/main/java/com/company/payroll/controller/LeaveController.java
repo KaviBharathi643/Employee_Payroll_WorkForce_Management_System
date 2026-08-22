@@ -94,8 +94,8 @@ public class LeaveController {
     @GetMapping("/report")
     @PreAuthorize("hasAnyRole('HR','ADMIN')")
     public ApiResponse<List<LeaveResponseDto>> getLeaveReport(
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fromDate,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate toDate,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fromDate,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate toDate,
             @RequestParam(required = false) Long userId) {
         List<LeaveResponseDto> response = leaveService.getLeaveReportData(fromDate, toDate, userId);
         return ApiResponse.success("Leave Report Generated Successfully", response);
