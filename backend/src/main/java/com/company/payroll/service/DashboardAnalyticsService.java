@@ -44,7 +44,7 @@ public class DashboardAnalyticsService {
 
         DashboardAnalyticsResponseDto.DashboardAnalyticsResponseDtoBuilder builder =
                 DashboardAnalyticsResponseDto.builder()
-                        .attendanceSummary(getAttendanceSummary(null, null))
+                        .attendanceSummary(getAttendanceSummary(LocalDate.now(), LocalDate.now()))
                         .leaveSummary(getLeaveSummary())
                         .payrollSummary(getPayrollSummary());
 

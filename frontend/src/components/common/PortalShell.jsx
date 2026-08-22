@@ -47,24 +47,24 @@ export default function PortalShell({ title, navItems }) {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <header className="border-b border-slate-200 bg-white">
+    <div className="min-h-screen bg-background">
+      <header className="border-b border-secondary/60 bg-card">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{title}</p>
-            <h1 className="text-lg font-semibold text-slate-900">Workforce Portal</h1>
+            <p className="text-xs font-bold uppercase tracking-wide text-primary">{title}</p>
+            <h1 className="text-lg font-bold text-primary-dark">Workforce Portal</h1>
           </div>
           <div className="flex items-center gap-4">
             <div className="relative" ref={bellRef}>
               <button
                 type="button"
                 onClick={() => setBellOpen((open) => !open)}
-                className="relative rounded-lg border border-slate-300 px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-100"
+                className="relative rounded-lg border border-primary px-3 py-1.5 text-sm font-medium text-primary hover:bg-secondary bg-card transition-colors"
                 aria-label="Notifications"
               >
                 Notifications
                 {bellData.unreadCount > 0 && (
-                  <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-blue-600 px-1 text-xs font-bold text-white">
+                  <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-primary-dark px-1 text-xs font-bold text-white">
                     {bellData.unreadCount > 9 ? '9+' : bellData.unreadCount}
                   </span>
                 )}
@@ -81,15 +81,15 @@ export default function PortalShell({ title, navItems }) {
             </div>
             <NavLink
               to={notificationsPath}
-              className="hidden rounded-full bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700 hover:bg-blue-100 sm:inline"
+              className="hidden rounded-full bg-secondary px-3 py-1 text-sm font-semibold text-primary-dark hover:bg-secondary/80 sm:inline transition-colors"
             >
               {bellData.unreadCount} unread
             </NavLink>
-            <span className="text-sm text-slate-600">{user?.fullName}</span>
+            <span className="text-sm font-semibold text-text-main">{user?.fullName}</span>
             <button
               type="button"
               onClick={logout}
-              className="rounded-lg border border-slate-300 px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-100"
+              className="rounded-lg border border-primary px-3 py-1.5 text-sm font-medium text-primary hover:bg-secondary bg-card transition-colors"
             >
               Logout
             </button>
@@ -105,10 +105,10 @@ export default function PortalShell({ title, navItems }) {
                 key={item.to}
                 to={item.to}
                 className={({ isActive }) =>
-                  `block rounded-lg px-3 py-2 text-sm font-medium ${
+                  `block rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
                     isActive
-                      ? 'bg-slate-900 text-white'
-                      : 'text-slate-700 hover:bg-slate-200'
+                      ? 'bg-secondary text-primary-dark font-semibold'
+                      : 'text-text-main hover:bg-secondary/40 hover:text-primary-dark'
                   }`
                 }
               >
@@ -117,7 +117,7 @@ export default function PortalShell({ title, navItems }) {
             ))}
           </nav>
         </aside>
-        <main className="min-h-[70vh] flex-1 rounded-xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+        <main className="min-h-[70vh] flex-1 rounded-xl bg-card p-6 shadow-sm ring-1 ring-secondary/50">
           <Outlet />
         </main>
       </div>

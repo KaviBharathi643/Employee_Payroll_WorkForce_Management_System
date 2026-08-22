@@ -1,11 +1,48 @@
 @import 'tailwindcss';
 
+@theme {
+  --color-primary: #3AAFAA;
+  --color-primary-dark: #237F7B;
+  --color-secondary: #DDF4F1;
+  --color-text-main: #123047;
+  --color-background: #F4F9F9;
+  --color-card: #FFFFFF;
+
+  /* Redefine default slate scale to align with text/bg/primary */
+  --color-slate-50: #F4F9F9;
+  --color-slate-100: #E6F3F2;
+  --color-slate-200: #CBECE8;
+  --color-slate-300: #A0DAD2;
+  --color-slate-400: #68C4B8;
+  --color-slate-500: #3AAFAA;
+  --color-slate-600: #2C9590;
+  --color-slate-700: #237F7B;
+  --color-slate-800: #1B5D5A;
+  --color-slate-900: #123047;
+  --color-slate-950: #0C2132;
+
+  /* Redefine default indigo/blue to align with primary/secondary */
+  --color-indigo-50: #DDF4F1;
+  --color-indigo-100: #CBECE8;
+  --color-indigo-200: #A0DAD2;
+  --color-indigo-500: #3AAFAA;
+  --color-indigo-600: #3AAFAA;
+  --color-indigo-700: #237F7B;
+  --color-indigo-800: #237F7B;
+
+  --color-blue-50: #DDF4F1;
+  --color-blue-100: #CBECE8;
+  --color-blue-600: #3AAFAA;
+  --color-blue-700: #237F7B;
+  --color-blue-800: #237F7B;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background-color: #f8fafc;
-  color: #0f172a;
+  background-color: var(--color-background);
+  color: var(--color-text-main);
 }
 
 #root {

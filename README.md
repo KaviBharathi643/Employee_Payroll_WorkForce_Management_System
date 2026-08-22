@@ -1,6 +1,6 @@
 # Employee Payroll & Workforce Management System
 
-<!-- Demo link will be updated after self-hosted production deployment -->
+### 📺 [Watch the Demo Video](https://drive.google.com/file/d/1a1SIgxX-rzjO9eFm2V9I8cmFyTWBgS1J/view?usp=drivesdk)
 
 ![Java](https://img.shields.io/badge/Java-21-ED8B00?style=flat-square&logo=java)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.5-6DB33F?style=flat-square&logo=springboot)
