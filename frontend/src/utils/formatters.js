@@ -109,3 +109,25 @@ export function timeInputToApi(value) {
   }
   return value.length === 5 ? `${value}:00` : value;
 }
+
+/** Format 10-digit phone number as (XXX) XXX-XXXX or standard grouped string */
+export function formatPhoneNumber(phone) {
+  if (!phone) return '—';
+  const cleaned = phone.replace(/\D/g, '');
+  if (cleaned.length === 10) {
+    return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(6)}`;
+  }
+  return phone;
+}
+
+/** Get up to two capital initials from a full name */
+export function getInitials(name) {
+  if (!name) return '??';
+  return name
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((word) => word.charAt(0).toUpperCase())
+    .join('');
+}
+
