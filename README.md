@@ -11,6 +11,10 @@
 
 A comprehensive, production-ready full-stack application for managing employee payroll, attendance, leave requests, and workforce operations. Built with modern technologies and best practices for scalability and maintainability.
 
+## Login Page
+<img width="1600" height="862" alt="WhatsApp Image 2026-08-22 at 11 21 06 AM" src="https://github.com/user-attachments/assets/3272f45c-fbda-494b-8277-fbb326b8254b" />
+
+
 ## Table of Contents
 
 - [Overview](#overview)
