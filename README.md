@@ -1,6 +1,6 @@
 # Employee Payroll & Workforce Management System
 
-🚀 **[Live Demo Link](https://gallant-alignment-production-8b39.up.railway.app/login)**
+<!-- Demo link will be updated after self-hosted deployment -->
 
 ![Java](https://img.shields.io/badge/Java-21-ED8B00?style=flat-square&logo=java)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.5-6DB33F?style=flat-square&logo=springboot)

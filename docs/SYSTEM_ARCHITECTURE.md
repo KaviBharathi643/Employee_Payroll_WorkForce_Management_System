@@ -465,7 +465,7 @@ Backend
 
 Spring Boot
 ↓
-Render / Railway
+Docker Compose
 
 Database
 
