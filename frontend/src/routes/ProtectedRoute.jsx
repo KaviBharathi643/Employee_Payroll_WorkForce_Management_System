@@ -19,3 +19,5 @@ export default function ProtectedRoute() {
 
   return <Outlet />;
 }
+
+// Touch to update git timestamp

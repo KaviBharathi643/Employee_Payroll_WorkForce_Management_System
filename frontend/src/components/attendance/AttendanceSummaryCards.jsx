@@ -1,3 +1,6 @@
+/**
+ * Grid component to render attendance metric summary cards (Present, Absent, Leave, Missing checkout).
+ */
 export default function AttendanceSummaryCards({ summary }) {
   const items = [
     { label: 'Present', value: summary?.presentCount ?? 0, tone: 'text-green-700' },

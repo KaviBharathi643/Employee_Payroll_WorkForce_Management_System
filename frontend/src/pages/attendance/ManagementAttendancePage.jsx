@@ -1,3 +1,6 @@
+/**
+ * Management Attendance Page component for HR and Admin roles to track overall attendance, filters, and reports.
+ */
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import Alert from '../../components/common/Alert';
 import PageHeader from '../../components/common/PageHeader';

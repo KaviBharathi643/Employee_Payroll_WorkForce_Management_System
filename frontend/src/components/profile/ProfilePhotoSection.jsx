@@ -12,6 +12,7 @@ export default function ProfilePhotoSection({ profile, onUpdated }) {
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
   const [busy, setBusy] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
 
   const validateFile = (file) => {
     if (!ALLOWED_TYPES.includes(file.type)) {
@@ -23,12 +24,8 @@ export default function ProfilePhotoSection({ profile, onUpdated }) {
     return null;
   };
 
-  const handleUpload = async (event) => {
-    const file = event.target.files?.[0];
-    event.target.value = '';
-    if (!file) {
-      return;
-    }
+  const processUpload = async (file) => {
+    if (!file) return;
 
     const validationError = validateFile(file);
     if (validationError) {
@@ -48,6 +45,32 @@ export default function ProfilePhotoSection({ profile, onUpdated }) {
     } finally {
       setBusy(false);
     }
+  };
+
+  const handleUpload = async (event) => {
+    const file = event.target.files?.[0];
+    event.target.value = '';
+    await processUpload(file);
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  };
+
+  const handleDrop = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+    const file = e.dataTransfer.files?.[0];
+    await processUpload(file);
   };
 
   const handleDelete = async () => {
@@ -73,7 +96,14 @@ export default function ProfilePhotoSection({ profile, onUpdated }) {
   };
 
   return (
-    <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+    <div
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
+      className={`relative flex flex-col items-start gap-4 rounded-xl border-2 border-dashed p-4 transition-colors sm:flex-row sm:items-center ${
+        isDragging ? 'border-indigo-500 bg-indigo-50/50' : 'border-transparent'
+      }`}
+    >
       <ProfileAvatar
         userId={profile.userId}
         fullName={profile.fullName}
@@ -100,7 +130,9 @@ export default function ProfilePhotoSection({ profile, onUpdated }) {
             </button>
           )}
         </div>
-        <p className="text-xs text-slate-500">JPG, JPEG, or PNG. Max 2 MB.</p>
+        <p className="text-xs text-slate-500">
+          JPG, JPEG, or PNG. Max 2 MB. Drag and drop supported.
+        </p>
         {notice && <Alert type="success">{notice}</Alert>}
         {error && <Alert>{error}</Alert>}
         <input
@@ -114,3 +146,4 @@ export default function ProfilePhotoSection({ profile, onUpdated }) {
     </div>
   );
 }
+

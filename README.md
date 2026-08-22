@@ -1,6 +1,6 @@
 # Employee Payroll & Workforce Management System
 
-🚀 **[Live Demo Link](https://gallant-alignment-production-8b39.up.railway.app/login)**
+<!-- Demo link will be updated after self-hosted production deployment -->
 
 ![Java](https://img.shields.io/badge/Java-21-ED8B00?style=flat-square&logo=java)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.5-6DB33F?style=flat-square&logo=springboot)
@@ -10,6 +10,12 @@
 ![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)
 
 A comprehensive, production-ready full-stack application for managing employee payroll, attendance, leave requests, and workforce operations. Built with modern technologies and best practices for scalability and maintainability.
+
+## Login Page
+<img width="1600" height="862" alt="WhatsApp Image 2026-08-22 at 11 21 06 AM" src="https://github.com/user-attachments/assets/3272f45c-fbda-494b-8277-fbb326b8254b" />
+
+## Dashboard 
+<img width="1919" height="931" alt="image" src="https://github.com/user-attachments/assets/e7503dfa-c9fd-48c3-aa09-d6c3d0088287" />
 
 ## Table of Contents
 
@@ -580,3 +586,5 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 ---
 
 **Made with ❤️ by Kavi Bharathi P**
+
+<!-- Touch to update git timestamp -->

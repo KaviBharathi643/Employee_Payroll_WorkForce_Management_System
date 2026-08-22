@@ -1,3 +1,6 @@
+/**
+ * Component to display color-coded status badges for employee attendance records.
+ */
 import { formatLabel } from '../../utils/formatters';
 
 const STYLES = {

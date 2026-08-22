@@ -528,7 +528,7 @@ Package: `com.company.payroll` — all layers as documented in PROJECT_STRUCTURE
 
 | Constraint | Requirement |
 |------------|-------------|
-| Deployment | Frontend: Vercel; Backend: Render/Railway; DB: cloud MySQL |
+| Deployment | Docker Compose (MySQL, backend, frontend with Nginx) |
 | Profiles | `application-prod.yml` — env vars for secrets |
 | File storage | Ephemeral disk on PaaS — document backup limitation; future: S3 (out of scope) |
 | JWT secret | Min 256-bit, env-only |
@@ -644,3 +644,5 @@ Package: `com.company.payroll` — all layers as documented in PROJECT_STRUCTURE
 This document supersedes informal analysis notes. Implementation MUST reference issue IDs R-01 through R-40 when making design decisions.
 
 **Blueprint Status:** APPROVED FOR FREEZE
+
+<!-- Touch to update git timestamp -->

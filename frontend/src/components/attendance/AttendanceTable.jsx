@@ -1,3 +1,6 @@
+/**
+ * Data table component for rendering daily attendance audit logs and check-in/out records.
+ */
 import { formatDate, formatDateTime } from '../../utils/formatters';
 import AttendanceStatusBadge from './AttendanceStatusBadge';
 

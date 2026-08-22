@@ -1,6 +1,7 @@
-# Environment
+# Environment files
 .env
 *.env
+!.env.example
 
 # Maven
 target/
@@ -8,9 +9,16 @@ target/
 # Node
 node_modules/
 
+# Build output
+dist/
+
 # IDE
 .idea/
 .vscode/
+.cursor/
+*.iml
+*.iws
+*.ipr
 
 # Java crash logs
 hs_err_pid*
@@ -18,6 +26,13 @@ replay_pid*
 
 # Logs
 *.log
+logs/
 
-.env
-*.env
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker
+.docker/
+
+# Touch to update git timestamp

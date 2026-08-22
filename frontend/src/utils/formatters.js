@@ -109,3 +109,40 @@ export function timeInputToApi(value) {
   }
   return value.length === 5 ? `${value}:00` : value;
 }
+
+/** Format 10-digit phone number as (XXX) XXX-XXXX or standard grouped string */
+export function formatPhoneNumber(phone) {
+  if (!phone) return '—';
+  const cleaned = phone.replace(/\D/g, '');
+  if (cleaned.length === 10) {
+    return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(6)}`;
+  }
+  return phone;
+}
+
+/** Get up to two capital initials from a full name */
+export function getInitials(name) {
+  if (!name) return '??';
+  return name
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((word) => word.charAt(0).toUpperCase())
+    .join('');
+}
+
+/**
+ * Format bytes into human-readable file size string (e.g. "1.5 MB", "420 KB")
+ * @param {number} bytes
+ * @param {number} [decimals=1]
+ */
+export function formatFileSize(bytes, decimals = 1) {
+  if (!bytes || bytes === 0) return '0 B';
+  const k = 1024;
+  const dm = decimals < 0 ? 0 : decimals;
+  const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
+}
+
+

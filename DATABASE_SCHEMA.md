@@ -13,11 +13,11 @@ This document provides a comprehensive overview of the database design for the E
 
 ## Overview
 
-The database consists of 12 core tables organized into functional domains:
+The database consists of 11 core tables organized into functional domains:
 
 1. **User Management**: users, user_profiles, user_employment, user_bank_details, otp_verifications
 2. **Attendance**: attendance
-3. **Leave Management**: leave_requests, leave_balances
+3. **Leave Management**: leave_requests (leave balances are computed dynamically)
 4. **Payroll**: payrolls, payslips
 5. **Notifications**: notifications
 6. **System Configuration**: system_settings
@@ -80,17 +80,6 @@ Total Database Size: ~10MB (estimated with sample data)
     │                   │ status           │                       │
     │                   └──────────────────┘                       │
     │                           │                                  │
-    │                           │                                  │
-    │                   ┌───────▼─────────┐                       │
-    │                   │leave_balances   │                       │
-    │                   │ ────────────────│                       │
-    │                   │ balance_id (PK) │                       │
-    │                   │ user_id (FK)    │                       │
-    │                   │ leave_type      │                       │
-    │                   │ total_days      │                       │
-    │                   │ used_days       │                       │
-    │                   │ remaining_days  │                       │
-    │                   └─────────────────┘                       │
     │                                                              │
     │                   ┌──────────────────┐                       │
     │                   │   payrolls       │                       │
@@ -383,35 +372,14 @@ CREATE TABLE leave_requests (
 
 ---
 
-### 7. LEAVE_BALANCES Table
-
-**Purpose**: Track leave balance for each employee
-
-```sql
-CREATE TABLE leave_balances (
-    balance_id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    user_id BIGINT NOT NULL,
-    leave_type ENUM('CASUAL', 'SICK', 'PERSONAL', 'PAID', 'UNPAID', 'MATERNITY', 'PATERNITY') NOT NULL,
-    fiscal_year INT NOT NULL,
-    total_days INT NOT NULL,
-    used_days INT NOT NULL DEFAULT 0,
-    remaining_days INT NOT NULL,
-    carryover_days INT DEFAULT 0,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    
-    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
-    INDEX idx_user_id (user_id),
-    INDEX idx_fiscal_year (fiscal_year),
-    UNIQUE KEY unique_user_leave_year (user_id, leave_type, fiscal_year)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-```
-
-**Columns**:
-- Leave balance tracking per employee
-- Fiscal year based balances
-
----
-
+### 7. Leave Balances (Computed Dynamically)
+
+> **Note:** Leave balances are not stored in a separate table. They are computed
+> dynamically at runtime from leave_requests data combined with system_settings.annual_paid_leave_limit.
+> See LeaveService.java and DashboardAnalyticsService.java for implementation.
+
+---
+
 ### 8. PAYROLLS Table
 
 **Purpose**: Store monthly payroll records
@@ -622,7 +590,7 @@ CREATE UNIQUE INDEX unique_user_payroll ON payrolls(user_id, payroll_month, payr
 - **users** → **user_bank_details**: One user has one bank detail (can extend to many)
 - **users** → **attendance**: One user has many attendance records
 - **users** → **leave_requests**: One user has many leave requests
-- **users** → **leave_balances**: One user has leave balances for different types
+- **users** → **leave_requests**: Leave balances are computed dynamically from approved leave requests
 - **users** → **payrolls**: One user has many payrolls (monthly)
 - **users** → **payslips**: One user has many payslips
 - **users** → **notifications**: One user has many notifications

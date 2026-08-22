@@ -27,6 +27,10 @@ public class FileStorageUtil {
     @Value("${app.upload.payslip-dir:uploads/payslips}")
     private String payslipUploadDir;
 
+    public boolean isAllowedImageType(String contentType) {
+        return contentType != null && ALLOWED_IMAGE_TYPES.contains(contentType.toLowerCase().trim());
+    }
+
     public Path getProfileUploadPath() {
         return ensureDirectory(profileUploadDir);
     }

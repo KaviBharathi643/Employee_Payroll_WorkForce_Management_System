@@ -1,14 +1,13 @@
 package com.company.payroll.service;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
 public class EmailService {
 
@@ -17,16 +16,32 @@ public class EmailService {
     @Value("${spring.mail.username:noreply@company.com}")
     private String fromEmail;
 
+    @Value("${app.mail.enabled:false}")
+    private boolean mailEnabled;
+
+    @Autowired
+    public EmailService(@Autowired(required = false) JavaMailSender mailSender) {
+        this.mailSender = mailSender;
+    }
+
     public void sendAccountCreatedEmail(String toEmail, String fullName, String temporaryPassword) {
+        String subject = "Your Account Has Been Created";
+        String body = "Hello " + fullName + ",\n\nYour account has been created.\n"
+                + "Email: " + toEmail + "\n"
+                + "Temporary Password: " + temporaryPassword + "\n\n"
+                + "Please log in and change your password.";
+        
+        if (!mailEnabled || mailSender == null) {
+            log.info("[SIMULATION] Email not sent (mail.enabled is false). To: {}, Subject: {}\nBody:\n{}", toEmail, subject, body);
+            return;
+        }
+
         try {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom(fromEmail);
             message.setTo(toEmail);
-            message.setSubject("Your Account Has Been Created");
-            message.setText("Hello " + fullName + ",\n\nYour account has been created.\n"
-                    + "Email: " + toEmail + "\n"
-                    + "Temporary Password: " + temporaryPassword + "\n\n"
-                    + "Please log in and change your password.");
+            message.setSubject(subject);
+            message.setText(body);
             mailSender.send(message);
         } catch (Exception ex) {
             log.error("Failed to send account created email to {}", toEmail, ex);
@@ -78,6 +93,11 @@ public class EmailService {
     }
 
     private void sendSimpleEmail(String toEmail, String subject, String text) {
+        if (!mailEnabled || mailSender == null) {
+            log.info("[SIMULATION] Email not sent (mail.enabled is false). To: {}, Subject: {}\nBody: {}", toEmail, subject, text);
+            return;
+        }
+
         try {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom(fromEmail);
@@ -91,12 +111,20 @@ public class EmailService {
     }
 
     public void sendOtpEmail(String toEmail, String otpCode) {
+        String subject = "Password Reset OTP";
+        String body = "Your password reset OTP is: " + otpCode + "\nThis OTP expires in 2 minutes.";
+
+        if (!mailEnabled || mailSender == null) {
+            log.info("[SIMULATION] Email not sent (mail.enabled is false). To: {}, Subject: {}\nBody: {}", toEmail, subject, body);
+            return;
+        }
+
         try {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom(fromEmail);
             message.setTo(toEmail);
-            message.setSubject("Password Reset OTP");
-            message.setText("Your password reset OTP is: " + otpCode + "\nThis OTP expires in 2 minutes.");
+            message.setSubject(subject);
+            message.setText(body);
             mailSender.send(message);
         } catch (Exception ex) {
             log.error("Failed to send OTP email to {}", toEmail, ex);
