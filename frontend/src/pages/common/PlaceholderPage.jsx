@@ -1,3 +1,6 @@
+/**
+ * Common fallback placeholder view component for routes under development or staging.
+ */
 export default function PlaceholderPage({ title, description }) {
   return (
     <div>
