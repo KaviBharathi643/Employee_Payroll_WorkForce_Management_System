@@ -20,3 +20,5 @@ public interface OtpVerificationRepository extends JpaRepository<OtpVerification
     @Query("DELETE FROM OtpVerification o WHERE o.user.id = :userId")
     void deleteByUserId(@Param("userId") Long userId);
 }
+
+// Touch to update git timestamp

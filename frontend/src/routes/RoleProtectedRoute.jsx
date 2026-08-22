@@ -20,3 +20,5 @@ export default function RoleProtectedRoute({ allowedRoles }) {
 
   return <Outlet />;
 }
+
+// Touch to update git timestamp

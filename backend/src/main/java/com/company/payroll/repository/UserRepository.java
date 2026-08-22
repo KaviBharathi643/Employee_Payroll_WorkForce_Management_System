@@ -18,3 +18,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findByRoleAndStatus(String role, String status);
 }
+
+// Touch to update git timestamp
